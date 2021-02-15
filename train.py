@@ -94,12 +94,14 @@ net_output = tf.placeholder(tf.float32,shape=[None,None,None,num_classes])
 
 network, init_fn = model_builder.build_model(model_name=args.model, frontend=args.frontend, net_input=net_input, num_classes=num_classes, crop_width=args.crop_width, crop_height=args.crop_height, is_training=True)
 
-loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=network, labels=net_output))
+# loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=network, labels=net_output))
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logitsv2(logits=network, labels=net_output))
 
-#opt = tf.train.RMSPropOptimizer(learning_rate=0.0001, decay=0.995).minimize(loss, var_list=[var for var in tf.trainable_variables()])
+# opt = tf.train.RMSPropOptimizer(learning_rate=0.0001, decay=0.995).minimize(loss, var_list=[var for var in tf.trainable_variables()])
 opt = tf.compat.v1.train.RMSPropOptimizer(learning_rate=0.0001, decay=0.995).minimize(loss, var_list=[var for var in tf.trainable_variables()])
 
-saver=tf.train.Saver(max_to_keep=1000)
+# saver=tf.train.Saver(max_to_keep=1000)
+saver=tf.compat.v1.train.Saver(max_to_keep=1000)
 sess.run(tf.global_variables_initializer())
 
 utils.count_params()
@@ -176,7 +178,7 @@ for epoch in range(args.epoch_start_i, args.num_epochs):
             input_image = utils.load_image(train_input_names[id])
             output_image = utils.load_image(train_output_names[id])
 
-            with tf.device('/cpu:0'):
+            with tf.device('/gpu:0'):
                 input_image, output_image = data_augmentation(input_image, output_image)
 
 
