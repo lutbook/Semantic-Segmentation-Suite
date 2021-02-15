@@ -7,10 +7,10 @@ args = parser.parse_args()
 
 
 if args.model == "ResNet50" or args.model == "ALL":
-	subprocess.check_output(['wget','http://download.tensorflow.org/models/resnet_v2_50_2017_04_14.tar.gz', "-P", "models"])
+	subprocess.check_output(['wget','http://download.tensorflow.org/models/resnet_v2_50_2017_04_14.tar.gz', "-P", "/kw_resources/models"])
 	try:
-		subprocess.check_output(['tar', '-xvf', 'models/resnet_v2_50_2017_04_14.tar.gz', "-C", "models"])
-		subprocess.check_output(['rm', 'models/resnet_v2_50_2017_04_14.tar.gz'])
+		subprocess.check_output(['tar', '-xvf', '/kw_resources/models/resnet_v2_50_2017_04_14.tar.gz', "-C", "/kw_resources/models"])
+		subprocess.check_output(['rm', '/kw_resources/models/resnet_v2_50_2017_04_14.tar.gz'])
 	except Exception as e:
 		print(e)
 		pass
