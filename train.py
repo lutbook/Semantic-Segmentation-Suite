@@ -112,7 +112,7 @@ if init_fn is not None:
     init_fn(sess)
 
 # Load a previous checkpoint if desired
-model_checkpoint_name = "/kw_resources/camvid_ckpt/checkpoints/latest_model_" + args.model + "_" + args.dataset + ".ckpt"
+model_checkpoint_name = "/kw_resources/camvid_ckpt/checkpoints/latest_model_" + args.model + "_" + args.dataset.slpit("/")[-1] + ".ckpt"
 if args.continue_training:
     print('Loaded latest model checkpoint')
     saver.restore(sess, model_checkpoint_name)
