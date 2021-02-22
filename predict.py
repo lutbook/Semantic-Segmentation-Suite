@@ -70,4 +70,5 @@ cv2.imwrite(os.path.join("/kw_resources/checkpoints", "%s_pred.png"%(file_name))
 
 print("")
 print("Finished!")
+print(os.path.join("/kw_resources/checkpoints", "%s_pred.png"%(file_name)))
 print("Wrote image " + "%s_pred.png"%(file_name))
