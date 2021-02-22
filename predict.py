@@ -44,8 +44,10 @@ network, _ = model_builder.build_model(args.model, net_input=net_input,
 sess.run(tf.global_variables_initializer())
 
 print('Loading model checkpoint weights')
-saver=tf.train.Saver(max_to_keep=1000)
+saver=tf.compat.v1.train.Saver(max_to_keep=1000)
 saver.restore(sess, args.checkpoint_path)
+
+# print('Loading model checkpoint weights') temp =./Semantic-Segmentation-Suite/checkpoints/" saver = tf.train.import_meta_graph(temp +"latest_model_FC-DenseNet56.ckpt.meta") saver.restore(sess, tf.train.latest_checkpoint(temp))
 
 
 print("Testing image " + args.image)
