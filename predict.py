@@ -47,9 +47,6 @@ print('Loading model checkpoint weights')
 saver=tf.compat.v1.train.Saver(max_to_keep=1000)
 saver.restore(sess, args.checkpoint_path)
 
-# print('Loading model checkpoint weights') temp =./Semantic-Segmentation-Suite/checkpoints/" saver = tf.train.import_meta_graph(temp +"latest_model_FC-DenseNet56.ckpt.meta") saver.restore(sess, tf.train.latest_checkpoint(temp))
-
-
 print("Testing image " + args.image)
 
 loaded_image = utils.load_image(args.image)
@@ -66,9 +63,8 @@ output_image = helpers.reverse_one_hot(output_image)
 
 out_vis_image = helpers.colour_code_segmentation(output_image, label_values)
 file_name = utils.filepath_to_name(args.image)
-cv2.imwrite(os.path.join("/kw_resources/checkpoints", "%s_pred.png"%(file_name)),cv2.cvtColor(np.uint8(out_vis_image), cv2.COLOR_RGB2BGR))
+cv2.imwrite( "%s_pred.png"%("/kw_resources/sss/" + file_name),cv2.cvtColor(np.uint8(out_vis_image), cv2.COLOR_RGB2BGR))
 
 print("")
 print("Finished!")
-print(os.path.join("/kw_resources/checkpoints", "%s_pred.png"%(file_name)))
 print("Wrote image " + "%s_pred.png"%(file_name))
